@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Creator - Generate Stunning Images with AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-magic"></i>
+                <span>AI Image Creator</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#generator">Generate</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#generator">Generate</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Transform Your <span class="gradient-text">Imagination</span> into Reality
+                </h1>
+                <p class="hero-subtitle">
+                    Harness the power of AI to create stunning, unique images from simple text prompts. 
+                    No design skills required – just your creativity.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#generator" class="btn btn-primary">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        Start Creating
+                    </a>
+                    <a href="#about" class="btn btn-secondary">
+                        <i class="fas fa-circle-info"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="floating-card card-3">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <h3>10K+</h3>
+                <p>Images Generated</p>
+            </div>
+            <div class="stat-item">
+                <h3>5K+</h3>
+                <p>Happy Users</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>AI Availability</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section id="generator" class="generator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Create Your Masterpiece</h2>
+                <p class="section-subtitle">Enter your prompt and let AI bring your vision to life</p>
+            </div>
+
+            <div class="generator-container">
+                <!-- Input Panel -->
+                <div class="input-panel">
+                    <div class="input-group">
+                        <label for="promptInput">
+                            <i class="fas fa-lightbulb"></i>
+                            Your Prompt
+                        </label>
+                        <textarea 
+                            id="promptInput" 
+                            placeholder="Describe your image... (e.g., 'A futuristic city on Mars at sunset with flying cars')"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="styleSelect">
+                            <i class="fas fa-paintbrush"></i>
+                            Art Style
+                        </label>
+                        <select id="styleSelect">
+                            <option value="">Default</option>
+                            <option value="realistic">Realistic</option>
+                            <option value="cartoon">Cartoon</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="abstract">Abstract</option>
+                            <option value="cyberpunk">Cyberpunk</option>
+                            <option value="anime">Anime</option>
+                            <option value="oil painting">Oil Painting</option>
+                            <option value="watercolor">Watercolor</option>
+                        </select>
+                    </div>
+
+                    <div class="file-upload-section">
+                        <label for="fileUpload" class="file-upload-label">
+                            <i class="fas fa-file-upload"></i>
+                            Upload Text File (.txt)
+                        </label>
+                        <input type="file" id="fileUpload" accept=".txt" hidden>
+                        <span id="fileName" class="file-name"></span>
+                    </div>
+
+
+
+                    <button id="generateBtn" class="btn btn-generate">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        Generate Image
+                    </button>
+                </div>
+
+                <!-- Result Panel -->
+                <div class="result-panel">
+                    <div id="resultContainer" class="result-container">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image"></i>
+                            <p>Your generated image will appear here</p>
+                        </div>
+                    </div>
+
+                    <!-- Loading Animation -->
+                    <div id="loadingAnimation" class="loading-animation" style="display: none;">
+                        <div class="ai-loader">
+                            <div class="loader-circle"></div>
+                            <div class="loader-circle"></div>
+                            <div class="loader-circle"></div>
+                        </div>
+                        <p class="loading-text">AI is creating your image...</p>
+                    </div>
+
+                    <!-- Generated Image Container -->
+                    <div id="generatedImageContainer" class="generated-image-container" style="display: none;">
+                        <img id="generatedImage" src="" alt="Generated Image">
+                        <div class="image-actions">
+                            <button class="action-btn" id="downloadBtn" title="Download">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="action-btn" id="shareBtn" title="Share">
+                                <i class="fas fa-share-nodes"></i>
+                            </button>
+                            <button class="action-btn" id="fullscreenBtn" title="Fullscreen">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="action-btn" id="regenerateBtn" title="Regenerate">
+                                <i class="fas fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your Creation Gallery</h2>
+                <p class="section-subtitle">Browse and manage your previously generated images</p>
+                <button id="clearHistoryBtn" class="btn btn-small btn-danger">
+                    <i class="fas fa-trash"></i>
+                    Clear History
+                </button>
+            </div>
+
+            <div id="galleryGrid" class="gallery-grid">
+                <!-- Gallery items will be dynamically added here -->
+            </div>
+
+            <div id="emptyGallery" class="empty-gallery">
+                <i class="fas fa-images"></i>
+                <p>No images yet. Start creating to build your gallery!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Create stunning images in just three simple steps</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>1. Describe Your Vision</h3>
+                    <p>Enter a detailed text prompt describing the image you want to create. Be creative and specific!</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders"></i>
+                    </div>
+                    <h3>2. Choose Your Style</h3>
+                    <p>Select from various art styles like realistic, cartoon, fantasy, or abstract to match your vision.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>3. Generate & Download</h3>
+                    <p>Click generate and watch AI create your image in seconds. Download, share, or regenerate as needed.</p>
+                </div>
+            </div>
+
+            <div class="tech-info">
+                <h3>Powered by Advanced AI Technology</h3>
+                <p>
+                    Our image generator uses DeepAI's cutting-edge Text-to-Image API, leveraging state-of-the-art 
+                    machine learning models to transform your words into visual art. Each generation is unique, 
+                    giving you one-of-a-kind creations every time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-magic"></i>
+                        <span>AI Image Creator</span>
+                    </div>
+                    <p class="footer-description">
+                        Transform your imagination into reality with the power of AI. 
+                        Create stunning, unique images from simple text prompts.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#generator">Generate</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://deepai.org" target="_blank">DeepAI API</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Image Creator. All rights reserved.</p>
+                <p>Made with </i> using AI Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Modal -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <button class="close-modal" id="closeModal">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
