@@ -12,8 +12,7 @@ CORS(app)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # <-- ADDED
 IMAGE_DIR = os.path.join(BASE_DIR, 'generated_images') # <-- ADDED
 
-# 2. --- IMPORTANT: PUT YOUR STABILITY AI KEY HERE ---
-# Get your key from https://platform.stability.ai/
+
 STABILITY_API_KEY = 'sk-ASxHeYH9gDVRHQRXWerwcRPJNIZlslO4oejsXuxkK3LHDore'
 
 # 3. Create a folder to save the generated images if it doesn't already exist
@@ -107,4 +106,5 @@ if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
     app.run(port=5500, debug=True)
+
 
