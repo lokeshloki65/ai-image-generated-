@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
 
-# 1. Initialize the Flask app and enable CORS
 app = Flask(__name__)
 CORS(app)
 
@@ -108,3 +107,4 @@ if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
     app.run(port=5500, debug=True)
+
