@@ -22,7 +22,6 @@ def generate_image():
      data = request.get_json()
     text_prompt = data.get('text')
 
-    # Check if the prompt is empty
     if not text_prompt:
         return jsonify({'success': False, 'error': 'Text prompt is required'}), 400
 
@@ -100,6 +99,7 @@ if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
     app.run(port=5500, debug=True)
+
 
 
 
