@@ -101,7 +101,8 @@ def serve_static(path):
 if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
-    app.run(port=5500, debug=True)
+    app.run(port=5500, debug=True) 
+
 
 
 
