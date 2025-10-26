@@ -79,12 +79,10 @@ def generate_image():
         print(f"❌ Server Error: {e}")
         return jsonify({'success': False, 'error': 'Internal server error'}), 500
 
-# 5. This new route is required to serve the images we save in the 'generated_images' folder
 @app.route('/generated_images/<path:filename>')
 def serve_generated_image(filename):
     return send_from_directory(IMAGE_DIR, filename) # <-- CHANGED to use absolute path
 
-# 6. These routes serve your HTML, CSS, and JS files
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'OK', 'message': 'Server is running'})
@@ -101,7 +99,7 @@ def serve_static(path):
 if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
-    app.run(port=5500, debug=True) 
+    app.run(port=5500, debug=True)
 
 
 
