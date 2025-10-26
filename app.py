@@ -8,22 +8,18 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-# --- NEW: Define absolute paths for reliability ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # <-- ADDED
 IMAGE_DIR = os.path.join(BASE_DIR, 'generated_images') # <-- ADDED
 
 
 STABILITY_API_KEY = 'sk-ASxHeYH9gDVRHQRXWerwcRPJNIZlslO4oejsXuxkK3LHDore'
 
-# 3. Create a folder to save the generated images if it doesn't already exist
 if not os.path.exists(IMAGE_DIR): # <-- CHANGED to use absolute path
     os.makedirs(IMAGE_DIR)        # <-- CHANGED to use absolute path
 
-# 4. This is the main API endpoint that your website calls to generate an image
 @app.route('/api/generate-image', methods=['POST'])
 def generate_image():
-    # Get the text prompt sent from the website
-    data = request.get_json()
+     data = request.get_json()
     text_prompt = data.get('text')
 
     # Check if the prompt is empty
@@ -106,5 +102,6 @@ if __name__ == '__main__':
     print('🚀 Starting Python Flask server for Stability AI...')
 
     app.run(port=5500, debug=True)
+
 
 
